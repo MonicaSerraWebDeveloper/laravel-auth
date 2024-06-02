@@ -12,6 +12,8 @@
               <th scope="col">Slug</th>
               <th scope="col">Client Name</th>
               <th scope="col">View</th>
+              <th scope="col">Modify</th>
+              <th scope="col">Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -25,8 +27,16 @@
                     <a href="{{ route('admin.portfolios.show', ['portfolio' => $portfolio->id]) }}">view</a>
                 </td>
                 <td>
-                  <a href="{{ route('admin.portfolios.edit', ['portfolio' => $portfolio->id]) }}">edit</a>
-              </td>
+                    <a href="{{ route('admin.portfolios.edit', ['portfolio' => $portfolio->id]) }}">edit</a>
+                </td>
+                <td>
+                    <form action="{{ route('admin.portfolios.destroy', ['portfolio' => $portfolio->id]) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+
+                        <button style="color: red;" class="btn btn-link" type="submit">delete</button>
+                    </form>
+                </td>
                 </tr>
             @endforeach
           </tbody>
