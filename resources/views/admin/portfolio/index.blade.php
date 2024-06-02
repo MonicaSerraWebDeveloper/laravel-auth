@@ -21,6 +21,9 @@
                 <td>{{ $portfolio->slug }}</td>
                 <td>{{ $portfolio->client_name }}</td>
                 <td>{{ $portfolio->summary }}</td>
+                <td>
+                    <a href="{{ route('admin.portfolios.show', ['portfolio' => $portfolio->id]) }}">view</a>
+                </td>
                 </tr>
             @endforeach
           </tbody>
