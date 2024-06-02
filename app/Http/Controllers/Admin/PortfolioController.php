@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Portfolio;
+use Illuminate\Support\Str;
 
 class PortfolioController extends Controller
 {
@@ -21,7 +22,7 @@ class PortfolioController extends Controller
             'portfolios' => $portfolios
         ];
 
-        return view('admin.portfolio.index', $data);
+        return view('admin.portfolios.index', $data);
     }
 
     /**
@@ -31,7 +32,7 @@ class PortfolioController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.portfolios.create');
     }
 
     /**
@@ -42,7 +43,14 @@ class PortfolioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $formData = $request->all();
+
+        $newPortfolio = new Portfolio();
+        $newPortfolio->fill($formData);
+        $newPortfolio->slug = Str::slug($newPortfolio->name, '-');
+        $newPortfolio->save();
+
+        return redirect()->route('admin.portfolios.show', ['portfolio' => $newPortfolio->id]);
     }
 
     /**
@@ -59,7 +67,7 @@ class PortfolioController extends Controller
             'portfolio' => $portfolio
         ];
 
-        return view('admin.portfolio.show', $data);
+        return view('admin.portfolios.show', $data);
     }
 
     /**
@@ -68,9 +76,9 @@ class PortfolioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Portfolio $portfolio)
     {
-        //
+        return view('admin.portfolios.edit', compact('portfolio'));
     }
 
     /**
@@ -80,9 +88,13 @@ class PortfolioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Portfolio $portfolio)
     {
-        //
+        $formData = $request->all();
+        $formData['slug'] = Str::slug($formData['name'], '-');
+        $portfolio->update($formData); 
+
+        return redirect()->route('admin.portfolios.show', ['portfolio' => $portfolio->id]);
     }
 
     /**

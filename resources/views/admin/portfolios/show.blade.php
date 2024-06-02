@@ -8,6 +8,4 @@
     <p>{{ $portfolio->summary }}</p>
     <div class="pb-3"><strong>Last Update: </strong>{{ $portfolio->update_at ? $portfolio->update_at : 'empty' }}</div>
     <div class="pb-3"><strong>Created: </strong>{{ $portfolio->created_at }}</div>
-    
-
 @endsection
