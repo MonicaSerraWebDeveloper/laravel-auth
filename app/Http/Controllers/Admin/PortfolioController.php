@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Portfolio;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class PortfolioController extends Controller
 {
@@ -43,6 +44,16 @@ class PortfolioController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate(
+            [
+                'name' => 'required|min:6|max:150|unique:portfolios,name',
+                'slug' => 'required|max:255',
+                'client_name' => 'required|min:2|max:255',
+                'summary' => 'nullable|min:10|max:2000',
+            ]
+        );
+
         $formData = $request->all();
 
         $newPortfolio = new Portfolio();
@@ -90,6 +101,21 @@ class PortfolioController extends Controller
      */
     public function update(Request $request, Portfolio $portfolio)
     {
+
+        $request->validate(
+            [
+                'name' => [
+                    'required',
+                    'min:6',
+                    'max:150',
+                    Rule::unique('portfolios')->ignore($portfolio->id),
+                ],
+                'slug' => 'required|max:255',
+                'client_name' => 'required|min:2|max:255',
+                'summary' => 'nullable|min:10|max:2000',
+            ]
+        );
+
         $formData = $request->all();
         $formData['slug'] = Str::slug($formData['name'], '-');
         $portfolio->update($formData); 
