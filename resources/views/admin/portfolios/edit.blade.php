@@ -2,6 +2,7 @@
 
 @section('content')
     <h2>Edit the portfolio: "{{ $portfolio->name }}"</h2>
+    <div class="py-3"><strong>ID:</strong> {{ $portfolio->id }}</div>
     <form action="{{ route('admin.portfolios.update', ['portfolio' => $portfolio->id]) }}" method="POST">
         @csrf
         @method('PUT')
