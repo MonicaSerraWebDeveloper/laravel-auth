@@ -3,14 +3,14 @@
 @section('content')
     <div class="pb-3">
         <h3>{{ $portfolio->name }}</h3>
-        <a  href="{{ route('admin.portfolios.edit', ['portfolio' => $portfolio->id]) }}">edit</a>
+        <a  href="{{ route('admin.portfolios.edit', ['portfolio' => $portfolio->slug]) }}">edit</a>
     </div>
     <div class="pb-3"><strong>ID: </strong>{{ $portfolio->id }}</div>
     <div class="pb-3"><strong>Slug: </strong>{{ $portfolio->slug }}</div>
     <div class="pb-3"><strong>Client Name: </strong>{{ $portfolio->client_name }}</div>
     <p>{{ $portfolio->summary }}</p>
     <div class="pb-3">
-        <form action="{{ route('admin.portfolios.destroy', ['portfolio' => $portfolio->id]) }}" method="POST">
+        <form action="{{ route('admin.portfolios.destroy', ['portfolio' => $portfolio->slug]) }}" method="POST">
             @csrf
             @method('DELETE')
 

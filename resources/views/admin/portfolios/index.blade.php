@@ -24,13 +24,13 @@
                 <td>{{ $portfolio->slug }}</td>
                 <td>{{ $portfolio->client_name }}</td>
                 <td>
-                    <a href="{{ route('admin.portfolios.show', ['portfolio' => $portfolio->id]) }}">view</a>
+                    <a href="{{ route('admin.portfolios.show', ['portfolio' => $portfolio->slug]) }}">view</a>
                 </td>
                 <td>
-                    <a href="{{ route('admin.portfolios.edit', ['portfolio' => $portfolio->id]) }}">edit</a>
+                    <a href="{{ route('admin.portfolios.edit', ['portfolio' => $portfolio->slug]) }}">edit</a>
                 </td>
                 <td>
-                    <form action="{{ route('admin.portfolios.destroy', ['portfolio' => $portfolio->id]) }}" method="POST">
+                    <form action="{{ route('admin.portfolios.destroy', ['portfolio' => $portfolio->slug]) }}" method="POST">
                         @csrf
                         @method('DELETE')
 

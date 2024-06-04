@@ -61,7 +61,7 @@ class PortfolioController extends Controller
         $newPortfolio->slug = Str::slug($newPortfolio->name, '-');
         $newPortfolio->save();
 
-        return redirect()->route('admin.portfolios.show', ['portfolio' => $newPortfolio->id]);
+        return redirect()->route('admin.portfolios.show', ['portfolio' => $newPortfolio->slug]);
     }
 
     /**
@@ -120,7 +120,7 @@ class PortfolioController extends Controller
         $formData['slug'] = Str::slug($formData['name'], '-');
         $portfolio->update($formData); 
 
-        return redirect()->route('admin.portfolios.show', ['portfolio' => $portfolio->id]);
+        return redirect()->route('admin.portfolios.show', ['portfolio' => $portfolio->slug]);
     }
 
     /**
