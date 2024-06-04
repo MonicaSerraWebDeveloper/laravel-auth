@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Portfolio;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
+
 
 class PortfolioController extends Controller
 {
@@ -44,18 +46,23 @@ class PortfolioController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
-
         $request->validate(
             [
                 'name' => 'required|min:6|max:150|unique:portfolios,name',
-                'slug' => 'required|max:255',
                 'client_name' => 'required|min:2|max:255',
                 'summary' => 'nullable|min:10|max:2000',
             ]
         );
 
         $formData = $request->all();
+
+        if($request->hasFile('cover_image')) {
+
+            $img_path = Storage::disk('public')->put('upload_images', $formData['cover_image']);
+            
+            $formData['cover_image'] = $img_path;
+        }
+
 
         $newPortfolio = new Portfolio();
         $newPortfolio->fill($formData);
@@ -111,7 +118,6 @@ class PortfolioController extends Controller
                     'max:150',
                     Rule::unique('portfolios')->ignore($portfolio->id),
                 ],
-                'slug' => 'required|max:255',
                 'client_name' => 'required|min:2|max:255',
                 'summary' => 'nullable|min:10|max:2000',
             ]

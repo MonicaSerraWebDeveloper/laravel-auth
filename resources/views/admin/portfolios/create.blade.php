@@ -20,8 +20,8 @@
         @enderror
 
         <div class="mb-3">
-            <label for="cover_imag" class="form-label">Default file input example</label>
-            <input id="cover_imag" class="form-control" type="file" name="cover_image">
+            <label for="cover_image" class="form-label">Carica l'immagine</label>
+            <input id="cover_image" class="form-control" type="file" name="cover_image">
         </div>
 
         <div class="mb-3">

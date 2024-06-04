@@ -14,6 +14,7 @@
         @error('name')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
+
         <div class="mb-3">
             <label for="client_name" class="form-label">Client Name</label>
             <input id="client_name" type="text" class="form-control" name="client_name" value="{{ old('client_name', $portfolio->client_name)  }}">
@@ -21,6 +22,12 @@
         @error('client_name')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
+
+        <div class="mb-3">
+            <label for="cover_image" class="form-label">Cambia immagine</label>
+            <input id="cover_image" class="form-control" type="file" name="cover_image" value="{{ old('cover_image', $portfolio->cover_image) }}>
+        </div>
+
         <div class="mb-3">
             <label for="summary" class="form-label">Summary</label>
             <textarea id="summary" type="text" class="form-control" rows="10" name="summary">{{ old('summary', $portfolio->summary) }}</textarea>
