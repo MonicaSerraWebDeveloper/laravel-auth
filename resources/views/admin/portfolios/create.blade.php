@@ -2,7 +2,7 @@
 
 @section('content')
     <h2>Create new portfolio</h2>
-    <form action="{{ route('admin.portfolios.store') }}" method="POST">
+    <form action="{{ route('admin.portfolios.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label for="name" class="form-label">Title</label>
@@ -18,6 +18,12 @@
         @error('client_name')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
+
+        <div class="mb-3">
+            <label for="cover_imag" class="form-label">Default file input example</label>
+            <input id="cover_imag" class="form-control" type="file" name="cover_image">
+        </div>
+
         <div class="mb-3">
             <label for="summary" class="form-label">Summary</label>
             <textarea id="summary" type="text" class="form-control" rows="10" name="summary" value="{{ old('summary') }}"></textarea>
