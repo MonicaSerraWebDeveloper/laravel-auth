@@ -51,6 +51,7 @@ class PortfolioController extends Controller
                 'name' => 'required|min:6|max:150|unique:portfolios,name',
                 'client_name' => 'required|min:2|max:255',
                 'summary' => 'nullable|min:10|max:2000',
+                'cover_image' => 'nullable|image|max:512'
             ]
         );
 
@@ -120,6 +121,7 @@ class PortfolioController extends Controller
                 ],
                 'client_name' => 'required|min:2|max:255',
                 'summary' => 'nullable|min:10|max:2000',
+                'cover_image' => 'nullable|image|max:512'
             ]
         );
 
