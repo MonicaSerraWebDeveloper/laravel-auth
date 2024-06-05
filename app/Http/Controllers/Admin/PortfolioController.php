@@ -70,7 +70,7 @@ class PortfolioController extends Controller
         $newPortfolio->slug = Str::slug($newPortfolio->name, '-');
         $newPortfolio->save();
 
-        return redirect()->route('admin.portfolios.show', ['portfolio' => $newPortfolio->slug])->with('message', $newPost->title . ' successfully created.');
+        return redirect()->route('admin.portfolios.show', ['portfolio' => $newPortfolio->slug]);
     }
 
     /**
@@ -139,7 +139,7 @@ class PortfolioController extends Controller
         $formData['slug'] = Str::slug($formData['name'], '-');
         $portfolio->update($formData); 
 
-        return redirect()->route('admin.portfolios.show', ['portfolio' => $portfolio->slug])->with('message', $post->title . ' successfully updated.');
+        return redirect()->route('admin.portfolios.show', ['portfolio' => $portfolio->slug]);
     }
 
     /**
