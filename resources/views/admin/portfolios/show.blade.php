@@ -19,7 +19,7 @@
         </form>
     </div>
     <div style="border: 1px solid grey; padding: 10px;">
-        <div><strong>Last Update: </strong>{{ $portfolio->update_at ? $portfolio->update_at : 'empty' }}</div>
+        <div><strong>Last Update: </strong>{{ $portfolio->updated_at ? $portfolio->updated_at : 'empty' }}</div>
         <div><strong>Created: </strong>{{ $portfolio->created_at }}</div>
     </div>
 @endsection
