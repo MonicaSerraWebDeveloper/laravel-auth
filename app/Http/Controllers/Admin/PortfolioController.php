@@ -69,7 +69,7 @@ class PortfolioController extends Controller
         $newPortfolio->slug = Str::slug($newPortfolio->name, '-');
         $newPortfolio->save();
 
-        return redirect()->route('admin.portfolios.show', ['portfolio' => $newPortfolio->slug]);
+        return redirect()->route('admin.portfolios.show', ['portfolio' => $newPortfolio->slug])->with('message', $newPost->title . ' successfully created.');
     }
 
     /**
@@ -124,10 +124,20 @@ class PortfolioController extends Controller
         );
 
         $formData = $request->all();
+
+        if($request->hasFile('cover_image')) {
+            if($portfolio->cover_image) {
+                Storage::delete($portfolio->cover_image);
+            }
+
+            $img_path = Storage::disk('public')->put('upload_images', $formData['cover_image']);
+            $formData['cover_image'] = $img_path;
+        }
+
         $formData['slug'] = Str::slug($formData['name'], '-');
         $portfolio->update($formData); 
 
-        return redirect()->route('admin.portfolios.show', ['portfolio' => $portfolio->slug]);
+        return redirect()->route('admin.portfolios.show', ['portfolio' => $portfolio->slug])->with('message', $post->title . ' successfully updated.');
     }
 
     /**

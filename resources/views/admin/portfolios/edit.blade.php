@@ -3,7 +3,7 @@
 @section('content')
     <h2>Edit the portfolio: "{{ $portfolio->name }}"</h2>
     <div class="py-3"><strong>ID:</strong> {{ $portfolio->id }}</div>
-    <form action="{{ route('admin.portfolios.update', ['portfolio' => $portfolio->slug]) }}" method="POST">
+    <form action="{{ route('admin.portfolios.update', ['portfolio' => $portfolio->slug]) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         
@@ -25,7 +25,15 @@
 
         <div class="mb-3">
             <label for="cover_image" class="form-label">Cambia immagine</label>
-            <input id="cover_image" class="form-control" type="file" name="cover_image" value="{{ old('cover_image', $portfolio->cover_image) }}>
+            <input id="cover_image" class="form-control" type="file" name="cover_image">
+
+            @if ($portfolio->cover_image)
+                <div>
+                    <img style="width: 500px;" src="{{ asset('storage/' . $portfolio->cover_image) }}" alt="{{ $portfolio->name }}">
+                </div>
+            @else 
+                <p>Non è ancora stata caricata nessuna immagine</p>
+            @endif
         </div>
 
         <div class="mb-3">

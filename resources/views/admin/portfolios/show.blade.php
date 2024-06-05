@@ -8,7 +8,7 @@
     <div class="pb-3"><strong>ID: </strong>{{ $portfolio->id }}</div>
     <div class="pb-3"><strong>Slug: </strong>{{ $portfolio->slug }}</div>
     <div class="pb-3"><strong>Client Name: </strong>{{ $portfolio->client_name }}</div>
-    <img style="width: 500px;" src="{{ asset('storage/' . $portfolio->cover_image) }}" alt="">
+    <img style="width: 500px;" src="{{ asset('storage/' . $portfolio->cover_image) }}" alt="{{ $portfolio->name }}">
     <p>{{ $portfolio->summary }}</p>
     <div class="pb-3">
         <form action="{{ route('admin.portfolios.destroy', ['portfolio' => $portfolio->slug]) }}" method="POST">
